@@ -1,1 +1,1 @@
-# https://www.udemy.com/course/solidity-ethereum-in-react-next-js-the-complete-guid
+https://www.udemy.com/course/solidity-ethereum-in-react-next-js-the-complete-guide
