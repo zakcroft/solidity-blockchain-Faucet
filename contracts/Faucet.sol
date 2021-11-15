@@ -14,11 +14,11 @@ contract Faucet is Ownable, Logger, IFaucet {
     mapping(uint256 => address) private lutFunders;
     mapping(address => uint256) public balances;
 
-    //event Console(address sender, uint numOfFunders);
+    //event alreadyFunded(address sender, uint numOfFunders);
 
     modifier limitWithdrawal(uint256 withdrawAmount) {
         require(
-            withdrawAmount > 100000000000000000,
+            withdrawAmount <= 100000000000000000,
             "Cannot withdrawal more than 0.1 ether"
         );
         _;
@@ -31,8 +31,8 @@ contract Faucet is Ownable, Logger, IFaucet {
     }
 
     function addFunds() external payable override {
-        require(!funders[msg.sender], "Already added funds"); // should be able to do thi.
-        //emit Console(msg.sender, numOfFunders);
+        //require(!funders[msg.sender], "Already added funds"); // should be able to do thi.
+        // emit alreadyFunded(msg.sender, numOfFunders);
         uint256 index = numOfFunders++;
         funders[msg.sender] = true;
         balances[msg.sender] = msg.value;
@@ -64,6 +64,8 @@ contract Faucet is Ownable, Logger, IFaucet {
         override
         limitWithdrawal(amount)
     {
+        // funders[msg.sender] = false;
+        // balances[msg.sender] = balances[msg.sender] - amount;
         payable(msg.sender).transfer(amount);
     }
 
