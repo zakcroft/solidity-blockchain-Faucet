@@ -1,0 +1,204 @@
+{
+  "contractName": "Test",
+  "abi": [
+    {
+      "inputs": [],
+      "name": "addFunds",
+      "outputs": [],
+      "stateMutability": "payable",
+      "type": "function",
+      "payable": true
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.8.10+commit.fc410830\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"name\":\"addFunds\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/test.sol\":\"Test\"},\"evmVersion\":\"london\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/contracts/test.sol\":{\"keccak256\":\"0xee47a246c86227ab57b03d7a91320ee97b0904d7f5c5d3dcf255019d197e6a7d\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://2a600fbc2483a313579e32edd7ae0ea8522a694456c6dfdefa3645aadfa5bc69\",\"dweb:/ipfs/QmWc6pAyTDExZhhvdeQEvZXDzQmKYnjB9BZmcRgQGoaedr\"]}},\"version\":1}",
+  "bytecode": "0x6080604052348015600f57600080fd5b50606180601d6000396000f3fe608060405260043610601c5760003560e01c8063a26759cb146021575b600080fd5b60276029565b005b56fea26469706673582212204dabaf406808fc29801f05ac8ebfeb47e74db9f17d8e3a18974029e4d38c604264736f6c634300080a0033",
+  "deployedBytecode": "0x608060405260043610601c5760003560e01c8063a26759cb146021575b600080fd5b60276029565b005b56fea26469706673582212204dabaf406808fc29801f05ac8ebfeb47e74db9f17d8e3a18974029e4d38c604264736f6c634300080a0033",
+  "immutableReferences": {},
+  "generatedSources": [],
+  "deployedGeneratedSources": [],
+  "sourceMap": "57:61:6:-:0;;;;;;;;;;;;;;;;;;;",
+  "deployedSourceMap": "57:61:6:-:0;;;;;;;;;;;;;;;;;;;;;77:39;;;:::i;:::-;;;:::o",
+  "source": "// SPDX-License-Identifier: MIT\npragma solidity ~0.8.9;\n\ncontract Test {\n    function addFunds() external payable {}\n}\n",
+  "sourcePath": "/Users/zak/Dropbox/dapps/solidity-blockchain-nextjs/contracts/test.sol",
+  "ast": {
+    "absolutePath": "project:/contracts/test.sol",
+    "exportedSymbols": {
+      "Test": [
+        386
+      ]
+    },
+    "id": 387,
+    "license": "MIT",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 381,
+        "literals": [
+          "solidity",
+          "~",
+          "0.8",
+          ".9"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "32:23:6"
+      },
+      {
+        "abstract": false,
+        "baseContracts": [],
+        "canonicalName": "Test",
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "fullyImplemented": true,
+        "id": 386,
+        "linearizedBaseContracts": [
+          386
+        ],
+        "name": "Test",
+        "nameLocation": "66:4:6",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": {
+              "id": 384,
+              "nodeType": "Block",
+              "src": "114:2:6",
+              "statements": []
+            },
+            "functionSelector": "a26759cb",
+            "id": 385,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "addFunds",
+            "nameLocation": "86:8:6",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 382,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "94:2:6"
+            },
+            "returnParameters": {
+              "id": 383,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "114:0:6"
+            },
+            "scope": 386,
+            "src": "77:39:6",
+            "stateMutability": "payable",
+            "virtual": false,
+            "visibility": "external"
+          }
+        ],
+        "scope": 387,
+        "src": "57:61:6",
+        "usedErrors": []
+      }
+    ],
+    "src": "32:87:6"
+  },
+  "legacyAST": {
+    "absolutePath": "project:/contracts/test.sol",
+    "exportedSymbols": {
+      "Test": [
+        386
+      ]
+    },
+    "id": 387,
+    "license": "MIT",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 381,
+        "literals": [
+          "solidity",
+          "~",
+          "0.8",
+          ".9"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "32:23:6"
+      },
+      {
+        "abstract": false,
+        "baseContracts": [],
+        "canonicalName": "Test",
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "fullyImplemented": true,
+        "id": 386,
+        "linearizedBaseContracts": [
+          386
+        ],
+        "name": "Test",
+        "nameLocation": "66:4:6",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": {
+              "id": 384,
+              "nodeType": "Block",
+              "src": "114:2:6",
+              "statements": []
+            },
+            "functionSelector": "a26759cb",
+            "id": 385,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "addFunds",
+            "nameLocation": "86:8:6",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 382,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "94:2:6"
+            },
+            "returnParameters": {
+              "id": 383,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "114:0:6"
+            },
+            "scope": 386,
+            "src": "77:39:6",
+            "stateMutability": "payable",
+            "virtual": false,
+            "visibility": "external"
+          }
+        ],
+        "scope": 387,
+        "src": "57:61:6",
+        "usedErrors": []
+      }
+    ],
+    "src": "32:87:6"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.8.10+commit.fc410830.Emscripten.clang"
+  },
+  "networks": {
+    "5777": {
+      "events": {},
+      "links": {},
+      "address": "0x09635039aBc71A8d381E696E2ff85DaA9251E530",
+      "transactionHash": "0x1158a575b7cd9cd4b001eff2e1f7c9c1032bc2abead92c19ea68feb1d89485bd"
+    }
+  },
+  "schemaVersion": "3.4.3",
+  "updatedAt": "2021-11-14T14:05:41.641Z",
+  "networkType": "ethereum",
+  "devdoc": {
+    "kind": "dev",
+    "methods": {},
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {},
+    "version": 1
+  }
+}
