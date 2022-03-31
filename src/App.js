@@ -1,21 +1,26 @@
 import { useEffect, useState, useCallback } from "react";
+
 import Web3 from "web3";
 
 import detectEthereumProvider from "@metamask/detect-provider";
 import { loadContract } from "./utils/load-contract";
+
 import useReload from "./hooks/useReload";
 
 import "./App.css";
 
 function App() {
+
   const [web3Api, setWeb3Api] = useState({
     provider: null,
     isProviderLoaded: false,
     web3: null,
     contract: null,
   });
+
   const [account, setAccount] = useState("");
   const [balance, setBalance] = useState("");
+  const [fundersBalance, setFundersBalance] = useState("");
   const [triggerReload, reload] = useReload();
   const canConnectToContract = account && web3Api.contract;
 
@@ -53,10 +58,14 @@ function App() {
   useEffect(() => {
     const loadProvider = async () => {
       const provider = await detectEthereumProvider();
-
       if (provider) {
-        // provider.request({ method: "eth_requestAccounts" });
+
+        // lower level API on provider
+        // const accounts = await provider.request({ method: "eth_requestAccounts" });
+        // console.log('accounts===', accounts);
+
         const contract = await loadContract("Faucet", provider);
+
         setWeb3Api({
           web3: new Web3(provider),
           provider,
@@ -72,27 +81,49 @@ function App() {
     loadProvider();
   }, []);
 
+  // Get the contract balance
   useEffect(() => {
     const loadBalance = async () => {
       const { contract, web3 } = web3Api;
       const balance = await web3.eth.getBalance(contract.address);
       setBalance(web3.utils.fromWei(balance, "ether"));
-      console.log("balance", typeof balance);
     };
 
     web3Api.contract && loadBalance();
   }, [web3Api, triggerReload]);
 
+  // Get the accounts
   useEffect(() => {
     const getAccount = async () => {
       const { web3 } = web3Api;
       const accounts = await web3.eth.getAccounts();
       setAccount(accounts[0]);
-      console.log(typeof accounts[0]);
     };
 
     web3Api.web3 && getAccount();
   }, [web3Api]);
+
+  // Get the funders balance
+  useEffect( () => {
+    const funderBalance = async () => {
+      const { contract, web3 } = web3Api;
+
+      const funderBalance = await contract.getFundersBalance({
+        from: account,
+      });
+
+      // convert from BN to decimal
+      const decimalValue = funderBalance.toString()
+
+      // convert from wei to ETH
+      const toEthValue = web3.utils.fromWei(decimalValue, 'ether');
+
+      setFundersBalance(toEthValue);
+    }
+
+    web3Api.contract && funderBalance();
+
+  }, [web3Api, account, triggerReload]);
 
   // functions
   const addFunds = useCallback(async () => {
@@ -100,7 +131,7 @@ function App() {
 
     await contract.addFunds({
       from: account,
-      value: web3.utils.toWei("1", "ether"),
+      value: web3.utils.toWei("0.1", "ether"),
     });
 
     reload();
@@ -118,7 +149,6 @@ function App() {
     reload();
   }, [web3Api, account, reload]);
 
-  console.log("RENDER", account);
   return (
     <>
       <div className="faucet-wrapper">
@@ -158,8 +188,12 @@ function App() {
             <span>Looking for Web3...</span>
           )}
           <div className="balance-view is-size-2">
-            Current Balance: <strong>{balance}</strong> ETH
+            Smart Contract Balance: <strong>{balance}</strong> ETH
           </div>
+          <div className="balance-view is-size-2">
+            Funders Balance: <strong>{fundersBalance || ""}</strong> ETH
+          </div>
+
           {!canConnectToContract && (
             <i className="is-block">Connect to Ganache</i>
           )}
@@ -168,7 +202,7 @@ function App() {
             className="button is-link mr-2"
             onClick={addFunds}
           >
-            Donate 1 ETH
+            Donate 0.1 ETH
           </button>
           <button
             disabled={!canConnectToContract}
