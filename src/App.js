@@ -25,49 +25,18 @@ function App() {
   const canConnectToContract = account && web3Api.contract;
 
   useEffect(() => {
-    const { provider } = web3Api;
-
-    async function setAccountListeners() {
-      const evtAccountsChanged = "accountsChanged";
-      const fnAccountsChanged = (accounts) => setAccount(accounts[0]);
-      provider.on(evtAccountsChanged, fnAccountsChanged);
-
-      const evtChainChanged = "chainChanged";
-      const fnChainChanged = (chainId) => {
-        window.location.reload();
-      };
-
-      provider.on(evtChainChanged, fnChainChanged);
-
-      // experimental API
-      provider._metamask.isUnlocked().then(async (unlocked) => {
-        if (unlocked) {
-          setAccount("");
-        }
-      });
-
-      return () => {
-        provider.on.removeListener(evtAccountsChanged, fnAccountsChanged);
-        provider.on.removeListener(evtChainChanged, fnChainChanged);
-      };
-    }
-
-    provider && setAccountListeners();
-  }, [web3Api, web3Api.provider]);
-
-  useEffect(() => {
     const loadProvider = async () => {
       const provider = await detectEthereumProvider();
       if (provider) {
 
-        // lower level API on provider
-        // const accounts = await provider.request({ method: "eth_requestAccounts" });
-        // console.log('accounts===', accounts);
-
         const contract = await loadContract("Faucet", provider);
 
+        const web3 = new Web3(provider)
+
+        window.web3 = web3;
+
         setWeb3Api({
-          web3: new Web3(provider),
+          web3,
           provider,
           contract,
           isProviderLoaded: true,
@@ -112,7 +81,7 @@ function App() {
         from: account,
       });
 
-      // convert from BN to decimal
+      // convert from BN to string
       const decimalValue = funderBalance.toString()
 
       // convert from wei to ETH
@@ -148,6 +117,39 @@ function App() {
 
     reload();
   }, [web3Api, account, reload]);
+
+  //////
+
+  useEffect(() => {
+    const { provider } = web3Api;
+
+    async function setAccountListeners() {
+      const evtAccountsChanged = "accountsChanged";
+      const fnAccountsChanged = (accounts) => setAccount(accounts[0]);
+      provider.on(evtAccountsChanged, fnAccountsChanged);
+
+      const evtChainChanged = "chainChanged";
+      const fnChainChanged = (chainId) => {
+        window.location.reload();
+      };
+
+      provider.on(evtChainChanged, fnChainChanged);
+
+      // experimental API
+      provider._metamask.isUnlocked().then(async (unlocked) => {
+        if (unlocked) {
+          setAccount("");
+        }
+      });
+
+      return () => {
+        provider.on.removeListener(evtAccountsChanged, fnAccountsChanged);
+        provider.on.removeListener(evtChainChanged, fnChainChanged);
+      };
+    }
+
+    provider && setAccountListeners();
+  }, [web3Api, web3Api.provider]);
 
   return (
     <>

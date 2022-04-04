@@ -7,15 +7,21 @@ export const loadContract = async (name, provider) => {
 
   const _contract = contract(Artifact);
   _contract.setProvider(provider);
-  console.log("_contract====", _contract);
 
-  let deployedContract = null;
+  let truffleContract = null;
   try {
-    deployedContract = await _contract.deployed();
-    console.log("deployedContract", deployedContract);
+    truffleContract = await _contract.deployed();
+    console.log("truffleContract", truffleContract);
   } catch (e) {
     console.log("You are connected to the wrong network");
   }
 
-  return deployedContract;
+  window.truffleContract = truffleContract;
+
+  return truffleContract;
 };
+
+//http://localhost:3000/contracts/Faucet.json
+
+// await fetch(`http://localhost:3000/contracts/Faucet.json`).then(res => res.json()).then(console.log);
+
