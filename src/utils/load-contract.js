@@ -3,10 +3,13 @@ import contract from "@truffle/contract";
 export const loadContract = async (name, provider) => {
   const res = await fetch(`/contracts/${name}.json`);
   const Artifact = await res.json();
+
   console.log("Artifact", Artifact);
 
   const _contract = contract(Artifact);
   _contract.setProvider(provider);
+
+  console.log("_contract", _contract);
 
   let truffleContract = null;
   try {
