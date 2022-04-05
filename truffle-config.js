@@ -48,7 +48,7 @@ module.exports = {
     },
     //truffle console --network ropsten
     goerli: {
-      provider: () => new HDWalletProvider(process.env.MNEMONIC, `https://goerli.infura.io/v3/d6b52f5791d24f539f39c4cbb12f2103`),
+      provider: () => new HDWalletProvider(process.env.MNEMONIC, process.env.GOERLI_API_KEY),
       network_id: 5
       // network_id: 3,       // Ropsten's id
       // gas: 5500000,        // Ropsten has a lower block limit than mainnet
