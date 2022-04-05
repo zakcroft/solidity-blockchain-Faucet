@@ -47,6 +47,10 @@ module.exports = {
       network_id: "*", // Any network (default: none)
     },
     //truffle console --network ropsten
+
+    //  MNEMONIC: promote nurse foster unique oppose pill cram climb practice trial angle paper
+    // "https://goerli.infura.io/v3/400cc8abcea54bdea880965e741c1b40"
+
     goerli: {
       provider: () => new HDWalletProvider(process.env.MNEMONIC, process.env.GOERLI_API_KEY),
       network_id: 5
