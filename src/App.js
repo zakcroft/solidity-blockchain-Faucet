@@ -24,11 +24,13 @@ function App() {
   const [triggerReload, reload] = useReload();
   const canConnectToContract = account && web3Api.contract;
 
+  console.log("account", account);
+  console.log("contract", web3Api.contract);
+
   useEffect(() => {
     const loadProvider = async () => {
       const provider = await detectEthereumProvider();
       if (provider) {
-
         const contract = await loadContract("Faucet", provider);
 
         const web3 = new Web3(provider)
